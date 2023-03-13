@@ -1,14 +1,23 @@
 
 # this is the directory where input image files are placed and where the output files will be stored
 
-DATA_PATH: "/Users/Yoges/Desktop/CMSC-630/Cancerous cell smears 2023/Cancerous cell smears"
-OUTPUT_PATH: "/Users/Yoges/Desktop/CMSC-630/output/"
-
-WIN_DATA_DIR: "C:/Users/Owner/Desktop/CMSC-630/Cancerous cell smears 2023/Cancerous cell smears"
-WIN_OUTPUT_DIR: "C:/Users/Owner/Desktop/CMSC-630/output/"
+# path where images are placed
+#DATA_PATH: "/Users/Ashwini/Desktop/CMSC-630/Cancerous cell smears 2023/Cancerous cell smears"
+DATA_PATH: "......./Cancerous cell smears"
 
 
-DATASET_OUTPUT: "/Users/Yoges/CMSC-630/output/dataset.csv"
+# path where output files will be stored
+# OUTPUT_PATH: "/Users/Ashwini/Desktop/CMSC-630/output/"
+OUTPUT_PATH: "..../output/"
+
+# Input and output directories
+# WIN_DATA_DIR: "C:/Users/Owner/Desktop/CMSC-630/Cancerous cell smears 2023/Cancerous cell smears"
+# WIN_OUTPUT_DIR: "C:/Users/Owner/Desktop/CMSC-630/output/"
+WIN_DATA_DIR: "......./Cancerous cell smears"
+WIN_OUTPUT_DIR: "....../CMSC-630/output/"
+
+#DATASET_OUTPUT: "/Users/Ashwini/CMSC-630/output/dataset.csv"
+DATASET_OUTPUT: "....../output/dataset.csv"
 
 # select color channel to convert to greyscale from with options as red, green, blue
 SELECTED_COLOR_CHANNEL: "red"
