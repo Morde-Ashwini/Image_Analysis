@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import os
 import platform
 import sys
@@ -13,7 +10,6 @@ import matplotlib
 import yaml
 import random
 from numpy.random import default_rng
-
 from matplotlib import pyplot as plt
 from PIL import Image
 from pathlib import Path
@@ -58,7 +54,6 @@ def save_image(img, filename, applied_method):
 
 # ceate histogram
 def calc_histogram(img):
-
     
     histogram = np.zeros(256)
     img_size = len(img)
@@ -69,8 +64,6 @@ def calc_histogram(img):
             histogram[l] += 1
 
     return histogram
-
-
 
 # Histogram equalization for each image
 # used numpy cumsum() function that returns the cumulative sum of the elements along the given axis.
@@ -85,12 +78,9 @@ def equalization(histogram, img):
     normalization = (cum_sum - cum_sum.min()) * 255
     n = cum_sum.max() - cum_sum.min()   
     uniform_norm = normalization / n
-    uni = uniform_norm.astype(np.uint8)
-    
-    
+    uni = uniform_norm.astype(np.uint8)    
     image_eq = uni[img_flattened]
     image_eq = np.reshape(image_eq, img.shape)
-
     return calc_histogram(image_eq), image_eq
 
 # Noise Addition : Salt and Pepper Noise
@@ -101,19 +91,14 @@ def equalization(histogram, img):
 def salt_pepper(img, strength):
     
     row, col = img.shape
-    cons = 0.5
-    
+    cons = 0.5 
     num_pixels_white = random.randint(0, img.size)
     num_pixels_white = strength * num_pixels_white * cons
-
     img_copy = np.copy(img)
-
     for i in range(int(num_pixels_white)):
-
         x=random.randint(0, col - 1)
         y=random.randint(0, row - 1)
         img_copy[y][x] = 255
-
     num_pixels_black = random.randint(0, img.size)
     num_pixels_black = strength * num_pixels_black * (1 - cons)
     
@@ -130,13 +115,10 @@ def salt_pepper(img, strength):
 
 def gaussian(img, strength):
     mean = 0.0
-
     row, col = img.shape
     rng = default_rng()
     noise = rng.normal(mean, strength, size=(row,col))
-
     noise_reshape = noise.reshape(img.shape)
-
     copy_img = img + noise_reshape
     
     return copy_img
@@ -146,13 +128,10 @@ def linear_filter(img, weights):
     
       # 3 x 3
     kernel = np.array(weights) 
-  
     rows, cols = img.shape 
     # 3 x 3
     mask_rows, mask_cols = kernel.shape 
-
     copy_img = np.zeros((rows, cols))
-
     for row in tqdm(range(1, rows - 1)):
         for col in range(1, cols - 1):
             for i in range(mask_rows):
@@ -165,15 +144,11 @@ def linear_filter(img, weights):
 # Filtering operations : median filter
 
 def median_filter(img, weights):
-  
     kernel = np.array(weights) 
-
     rows, cols = img.shape 
     # 3 x 3
     kernel_rows, kernel_cols = kernel.shape 
-
     window = np.zeros(kernel.size) 
-
     copy_img = np.zeros((rows, cols)) 
 
     for row in tqdm(range(1, rows - 1)):
@@ -186,11 +161,9 @@ def median_filter(img, weights):
                     pixel += 1
 
             window.sort()
-
             copy_img[row][col] = window[pixel // 2]
         
     copy_img = copy_img.astype(np.uint8)
-
     return copy_img
 
 # Image Quantization:
@@ -349,16 +322,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 
